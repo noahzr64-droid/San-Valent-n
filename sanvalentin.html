@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    background: linear-gradient(to top, #ffe6f0, #ffffff);
+    overflow:hidden;
+    font-family: 'Segoe UI', sans-serif;
+    text-align:center;
+}
+
+/* GOTA */
+.drop{
+    width:20px;
+    height:30px;
+    background:#4da6ff;
+    border-radius:50%;
+    position:absolute;
+    top:-50px;
+    left:50%;
+    transform:translateX(-50%);
+    animation: fall 2s forwards;
+}
+
+@keyframes fall{
+    to{
+        top:60%;
+    }
+}
+
+/* ÁRBOL */
+.tree{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%) scale(0);
+    transition:2s;
+}
+
+.trunk{
+    width:20px;
+    height:100px;
+    background:#8b5a2b;
+    margin:0 auto;
+}
+
+.leaves{
+    width:120px;
+    height:120px;
+    background:#4caf50;
+    border-radius:50%;
+    position:relative;
+    top:-60px;
+}
+
+/* CORAZONES */
+.heart{
+    width:20px;
+    height:20px;
+    background:red;
+    position:absolute;
+    transform: rotate(45deg);
+    opacity:0;
+    animation: appear 1s forwards;
+}
+
+.heart:before,
+.heart:after{
+    content:"";
+    width:20px;
+    height:20px;
+    background:red;
+    border-radius:50%;
+    position:absolute;
+}
+
+.heart:before{
+    top:-10px;
+    left:0;
+}
+
+.heart:after{
+    left:-10px;
+    top:0;
+}
+
+@keyframes appear{
+    to{
+        opacity:1;
+    }
+}
+
+/* TEXTO */
+.message{
+    position:absolute;
+    width:90%;
+    left:50%;
+    transform:translateX(-50%);
+    top:20%;
+    font-size:18px;
+    opacity:0;
+    transition:2s;
+}
+
+/* BOTONES */
+.buttons{
+    margin-top:20px;
+}
+
+button{
+    padding:10px 20px;
+    margin:10px;
+    border:none;
+    border-radius:20px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.yes{
+    background:#ff4d88;
+    color:white;
+}
+
+.no{
+    background:#ccc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="drop"></div>
+
+<div class="tree" id="tree">
+    <div class="leaves"></div>
+    <div class="trunk"></div>
+</div>
+
+<div class="message" id="message">
+    <p>
+        <!-- AQUÍ CAMBIA TU TEXTO -->
+        Así como una gota puede hacer crecer un árbol,<br>
+        tú hiciste crecer algo en mí que no sabía que necesitaba.<br><br>
+        Quiero seguir creciendo… pero contigo.
+    </p>
+
+    <div class="buttons">
+        <h3>¿Quieres ser mi San Valentín? ❤️</h3>
+        <button class="yes" onclick="yes()">Sí 💖</button>
+        <button class="no" id="noBtn">No 🙈</button>
+    </div>
+</div>
+
+<script>
+
+// Después de que cae la gota
+setTimeout(()=>{
+    document.querySelector(".drop").style.display="none";
+    document.getElementById("tree").style.transform="translateX(-50%) scale(1)";
+},2000);
+
+// Aparecen corazones
+setTimeout(()=>{
+    for(let i=0;i<8;i++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.style.left=(45+Math.random()*10)+"%";
+        heart.style.top=(40+Math.random()*20)+"%";
+        heart.style.animationDelay=(i*0.2)+"s";
+        document.body.appendChild(heart);
+    }
+},3500);
+
+// Aparece mensaje
+setTimeout(()=>{
+    document.getElementById("message").style.opacity=1;
+},4500);
+
+// Botón No se mueve
+let noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*80+"%";
+    noBtn.style.top=Math.random()*80+"%";
+});
+
+function yes(){
+    document.body.innerHTML = "<h1 style='margin-top:40%; color:#ff4d88;'>Sabía que dirías que sí ❤️</h1>";
+}
+
+</script>
+
+</body>
+</html>
